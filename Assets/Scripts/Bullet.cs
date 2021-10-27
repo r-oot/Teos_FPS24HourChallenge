@@ -10,6 +10,7 @@ public class Bullet : MonoBehaviour
     private float timer;
     public Vector3 BulletDirection;
     public Gun Gun;
+    public GameObject Crater;
 
     private void OnEnable()
     {
@@ -42,9 +43,12 @@ public class Bullet : MonoBehaviour
         Fired = false;
         Gun.AddBulletToPool(this.gameObject);
     }
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
         DeactivateBullet();
+        Vector3 contactPoint = other.ClosestPoint(transform.position);
+        Instantiate(Crater, contactPoint, Quaternion.identity);
+        Debug.Log("Collided");
     }
     public void SetPositionAndRotation(Vector3 newPos, Quaternion newRot)
     {

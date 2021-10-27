@@ -144,7 +144,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!114 &9212952757672258286
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -159,6 +159,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Fired: 0
   BulletFlyTime: 4
-  BulletSpeed: 10
+  BulletSpeed: 60
   BulletDirection: {x: 0, y: 0, z: 0}
   Gun: {fileID: 0}
+  Crater: {fileID: 7946958901623751194, guid: 8a60cdf301dff8749b3b52cb4b3bf80d, type: 3}
