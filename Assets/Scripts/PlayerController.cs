@@ -7,16 +7,17 @@ public class PlayerController : MonoBehaviour
     private Managers managers;
     private PlayerMovement playerMovement;
     private Gun gun;
+    private ShootSign shootSign;
 
     [Header("Movements")]
     [SerializeField, Range(50, 100)]
     private float mouseSensitivity = 100;
-
     private void Awake()
     {
         managers = FindObjectOfType<Managers>();
         playerMovement = GetComponent<PlayerMovement>();
         gun = GetComponentInChildren<Gun>();
+        shootSign = FindObjectOfType<ShootSign>();    
     }
 
     private void Start()
@@ -35,6 +36,7 @@ public class PlayerController : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 gun.Fire();
+                shootSign.ShootedBullet = 1;
             }
         }
     }
