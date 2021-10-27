@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private Camera cam;
+    public Camera Cam;
 
+    private float MoveSpeed = 10;
     float xRotation = 0;
     private void Awake()
     {
-        cam = Camera.main;
+        Cam = Camera.main;
     }
 
     private void Start()
@@ -26,7 +27,11 @@ public class PlayerMovement : MonoBehaviour
     {
         xRotation -= y;
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
-        cam.transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
+        Cam.transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
         transform.Rotate(x * Vector3.up);
+    }
+    public void MoveCharacter(Vector3 dir)
+    {
+        transform.position += dir * MoveSpeed * Time.deltaTime;
     }
 }
