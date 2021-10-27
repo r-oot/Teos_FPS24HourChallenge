@@ -13,13 +13,14 @@ public class Bullet : MonoBehaviour
     private void OnEnable()
     {
         timer = 0;
+        transform.SetParent(null);
     }
 
     private void Update()
     {
         if (Fired)
         {
-            transform.Translate(Vector3.up * Time.deltaTime * BulletSpeed);
+            transform.Translate(Vector3.forward * Time.deltaTime * BulletSpeed);
             CheckFlyTime();
         }
     }
@@ -42,5 +43,12 @@ public class Bullet : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         DeactivateBullet();
+    }
+    public void SetPositionAndRotation(Vector3 newPos, Quaternion newRot)
+    {
+        transform.position = newPos;
+        transform.localRotation = newRot;
+        Fired = true;
+        
     }
 }

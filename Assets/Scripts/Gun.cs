@@ -55,13 +55,10 @@ public class Gun : GunBase
         {
             Bullet bullet = pooledObjects[0].GetComponent<Bullet>();
             pooledObjects.RemoveAt(0);
-            bullet.transform.SetParent(null);
-            bullet.transform.position = bulletInitialPoint.transform.position;
-            bullet.transform.rotation = bulletInitialPoint.transform.rotation;
+            bullet.SetPositionAndRotation(bulletInitialPoint.transform.position, bulletInitialPoint.transform.localRotation);
             bullet.Gun = this;
 
             bullet.gameObject.SetActive(true);
-            bullet.Fired = true;
         }
     }
 
