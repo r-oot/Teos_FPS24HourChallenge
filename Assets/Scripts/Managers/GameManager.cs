@@ -47,6 +47,7 @@ public sealed class GameManager : MonoBehaviour {
 
     private void Awake()
     {
-        GameState = GlobalVariables.GameStates.TapToPlay; //TODO: UI taptoplay eklendiðinde TapToPlay'e deðiþecek.
+        GameState = GlobalVariables.GameStates.TapToPlay;
+        Application.targetFrameRate = 60;
     }
 }
