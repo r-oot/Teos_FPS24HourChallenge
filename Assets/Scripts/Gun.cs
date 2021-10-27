@@ -12,9 +12,12 @@ public class Gun : GunBase
     public int PoolAmount = 20;
     public List<GameObject> pooledObjects;
 
+    public Transform Crosshair;
+    public Vector3 BulletDirectionNormalized;
+    public Camera Cam;
     private void Awake()
     {
-        
+        Cam = Camera.main;
     }
     private void Start()
     {
@@ -23,8 +26,19 @@ public class Gun : GunBase
 
     private void Update()
     {
-        
+        Ray RayOrigin = Cam.ScreenPointToRay(Crosshair.position);
+        RaycastHit hit;
+        if(Physics.Raycast(RayOrigin,out hit))
+        {
+            if(hit.collider != null)
+            {
+                Vector3 direction = hit.point - bulletInitialPoint.transform.position;
+                BulletDirectionNormalized = direction.normalized;
+                Debug.DrawRay(bulletInitialPoint.transform.position, direction, Color.red, Time.deltaTime);
+            }
+        }
     }
+
     public void InstantiatePoolObjects()
     {
         pooledObjects = new List<GameObject>();
@@ -56,6 +70,7 @@ public class Gun : GunBase
             Bullet bullet = pooledObjects[0].GetComponent<Bullet>();
             pooledObjects.RemoveAt(0);
             bullet.SetPositionAndRotation(bulletInitialPoint.transform.position, bulletInitialPoint.transform.localRotation);
+            bullet.BulletDirection = BulletDirectionNormalized;
             bullet.Gun = this;
 
             bullet.gameObject.SetActive(true);

@@ -158,6 +158,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Fired: 0
-  BulletFlyTime: 3.5
+  BulletFlyTime: 4
   BulletSpeed: 10
+  BulletDirection: {x: 0, y: 0, z: 0}
   Gun: {fileID: 0}

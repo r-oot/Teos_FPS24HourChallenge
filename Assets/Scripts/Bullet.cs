@@ -8,12 +8,14 @@ public class Bullet : MonoBehaviour
     [SerializeField] private float BulletFlyTime;
     [SerializeField] private float BulletSpeed;
     private float timer;
+    public Vector3 BulletDirection;
     public Gun Gun;
 
     private void OnEnable()
     {
         timer = 0;
         transform.SetParent(null);
+        transform.rotation = Quaternion.LookRotation(BulletDirection);
     }
 
     private void Update()
