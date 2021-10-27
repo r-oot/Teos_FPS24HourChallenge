@@ -4,10 +4,23 @@ using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
-    private TapToPlayUI tapToPlayUI;
 
-    private void Awake()
+    public Transform TapToPlayUITransform;
+    public InGameUI InGameUI;
+
+    public void SetStatusTapToPlayUI(bool value)
     {
-        tapToPlayUI = GetComponentInChildren<TapToPlayUI>();
+        TapToPlayUITransform.gameObject.SetActive(value);
+    }
+    public void SetStatusInGameUI(bool value)
+    {
+        InGameUI.gameObject.SetActive(value);
+    }
+
+    public void ButtonTapToPlayClicked()
+    {
+        SetStatusTapToPlayUI(false);
+        SetStatusInGameUI(true);
+        GameManager.Instance.GameState = GlobalVariables.GameStates.InGame;
     }
 }

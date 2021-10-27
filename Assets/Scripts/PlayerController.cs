@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour 
 {
-    private Managers managers;
     private PlayerMovement playerMovement;
     private Gun gun;
     private ShootSign shootSign;
@@ -15,20 +14,14 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        managers = FindObjectOfType<Managers>();
         playerMovement = GetComponent<PlayerMovement>();
         gun = GetComponentInChildren<Gun>();
         shootSign = FindObjectOfType<ShootSign>();    
     }
 
-    private void Start()
-    {
-        Cursor.lockState = CursorLockMode.Locked;
-    }
-
     private void Update()
     {
-        if (managers.GameManager.GameState.Equals(GlobalVariables.GameStates.InGame))
+        if (GameManager.Instance.GameState.Equals(GlobalVariables.GameStates.InGame))
         {
             float rotateX = Input.GetAxis("Mouse X") * Time.deltaTime * mouseSensitivity;
             float rotateY = Input.GetAxis("Mouse Y") * Time.deltaTime * mouseSensitivity;

@@ -26,11 +26,16 @@ public class Gun : GunBase
 
     private void Update()
     {
+        SetAimToCrosshair();
+    }
+
+    private void SetAimToCrosshair()
+    {
         Ray RayOrigin = Cam.ScreenPointToRay(Crosshair.position);
         RaycastHit hit;
-        if(Physics.Raycast(RayOrigin,out hit))
+        if (Physics.Raycast(RayOrigin, out hit))
         {
-            if(hit.collider != null)
+            if (hit.collider != null)
             {
                 Vector3 direction = hit.point - bulletInitialPoint.transform.position;
                 BulletDirectionNormalized = direction.normalized;
