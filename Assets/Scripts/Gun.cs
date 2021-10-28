@@ -6,7 +6,8 @@ public class Gun : GunBase
 {
     [SerializeField] private GunType gunType = GunType.Single;
     private ShootSign shootSign;
-
+    [SerializeField, Range(2, 5)]
+    private int BurstBulletCount;
     public int BulletPoolAmount = 30;
     public List<GameObject> pooledObjects;
 
@@ -99,6 +100,7 @@ public class Gun : GunBase
         if (BulletFeaturePanel.Instance.isRedActive)
         {
             //Material deðiþtir
+            //BulletPrefab.GetComponentInChildren<MeshRenderer>().material = redMat
         }
         if (BulletFeaturePanel.Instance.isBigToggleActive)
         {
@@ -129,9 +131,9 @@ public class Gun : GunBase
 
     private IEnumerator FireBurstBullet()
     {
-        if (pooledObjects.Count != 0)
+        if (pooledObjects.Count >= BurstBulletCount)
         {
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < BurstBulletCount; i++)
             {
                 Bullet bullet = pooledObjects[0].GetComponent<Bullet>();
                 pooledObjects.RemoveAt(0);

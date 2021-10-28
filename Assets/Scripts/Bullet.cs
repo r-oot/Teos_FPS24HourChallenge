@@ -12,7 +12,6 @@ public class Bullet : MonoBehaviour
     public Vector3 BulletDirection;
     public Gun Gun;
     public GameObject Crater;
-
     private void OnEnable()
     {
         timer = 0;

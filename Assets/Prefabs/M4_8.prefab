@@ -509,11 +509,13 @@ MonoBehaviour:
   BulletInitialPoint: {fileID: 4471684421423197589}
   BulletPrefab: {fileID: 6516757713593652252, guid: 872dc714992c19f44b0dde9b7c99c972, type: 3}
   PoolTransform: {fileID: 7511875170930226087}
+  BulletDirectionNormalized: {x: 0, y: 0, z: 0}
+  Cam: {fileID: 0}
   gunType: 0
+  BurstBulletCount: 3
   BulletPoolAmount: 30
   pooledObjects: []
   Crosshair: {fileID: 0}
-  BulletDirectionNormalized: {x: 0, y: 0, z: 0}
 --- !u!1 &4471684421423197586
 GameObject:
   m_ObjectHideFlags: 0
