@@ -5,20 +5,15 @@ using UnityEngine;
 public class Gun : GunBase
 {
     [SerializeField] private GunType gunType = GunType.Single;
-    [SerializeField] private Transform bulletInitialPoint;
     private ShootSign shootSign;
 
-    public GameObject BulletPrefab;
-    public Transform PoolTransform;
     public int BulletPoolAmount = 30;
     public List<GameObject> pooledObjects;
 
     public Transform Crosshair;
-    public Vector3 BulletDirectionNormalized;
-    private Camera cam;
     private void Awake()
     {
-        cam = Camera.main;
+        base.Cam = Camera.main;
         shootSign = FindObjectOfType<ShootSign>();
     }
     private void Start()
@@ -35,7 +30,7 @@ public class Gun : GunBase
         }
     }
 
-    private void SwitchFireType()
+    public override void SwitchFireType()
     {
         switch (gunType)
         {
@@ -53,14 +48,15 @@ public class Gun : GunBase
     RaycastHit hit;
     private void SetAimToCrosshair()
     {
-        Ray RayOrigin = cam.ScreenPointToRay(Crosshair.position);
+        Ray RayOrigin = Cam.ScreenPointToRay(Crosshair.position);
         if (Physics.Raycast(RayOrigin, out hit))
         {
+            Vector3 direction;
             if (hit.collider != null)
             {
-                Vector3 direction = hit.point - bulletInitialPoint.transform.position;
-                BulletDirectionNormalized = direction.normalized;
-                Debug.DrawRay(bulletInitialPoint.transform.position, direction, Color.red, Time.deltaTime);
+                direction = hit.point - base.BulletInitialPoint.transform.position;
+                base.BulletDirectionNormalized = direction.normalized;
+                Debug.DrawRay(base.BulletInitialPoint.transform.position, direction, Color.red, Time.deltaTime);
             }
         }
     }
@@ -115,7 +111,7 @@ public class Gun : GunBase
             Bullet bullet = pooledObjects[0].GetComponent<Bullet>();
             pooledObjects.RemoveAt(0);
             SetBulletFeatures();
-            bullet.SetPositionAndRotation(bulletInitialPoint.transform.position, bulletInitialPoint.transform.localRotation);
+            bullet.SetPositionAndRotation(base.BulletInitialPoint.transform.position, base.BulletInitialPoint.transform.localRotation);
             bullet.BulletDirection = BulletDirectionNormalized;
             bullet.Gun = this;
             shootSign.ShootedBullet++;
@@ -132,9 +128,9 @@ public class Gun : GunBase
                 Bullet bullet = pooledObjects[0].GetComponent<Bullet>();
                 pooledObjects.RemoveAt(0);
                 SetBulletFeatures();
-                bullet.SetPositionAndRotation(bulletInitialPoint.transform.position, bulletInitialPoint.transform.localRotation);
+                bullet.SetPositionAndRotation(base.BulletInitialPoint.transform.position, base.BulletInitialPoint.transform.localRotation);
                 Vector3 deflectionRate = Random.insideUnitSphere;
-                bullet.BulletDirection = ((hit.point + ((i == 0) ? Vector3.zero : new Vector3(deflectionRate.x, deflectionRate.y, 0))) - bulletInitialPoint.transform.position);
+                bullet.BulletDirection = ((hit.point + ((i == 0) ? Vector3.zero : new Vector3(deflectionRate.x, deflectionRate.y, 0))) - base.BulletInitialPoint.transform.position);
                 bullet.Gun = this;
                 shootSign.ShootedBullet++;
                 bullet.gameObject.SetActive(true);

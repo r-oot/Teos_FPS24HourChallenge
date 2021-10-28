@@ -506,12 +506,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab952c01dcee3c7468d7b1fc487be58b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gunType: 0
-  bulletInitialPoint: {fileID: 4471684421423197589}
+  BulletInitialPoint: {fileID: 4471684421423197589}
   BulletPrefab: {fileID: 6516757713593652252, guid: 872dc714992c19f44b0dde9b7c99c972, type: 3}
   PoolTransform: {fileID: 7511875170930226087}
-  PoolAmount: 20
+  gunType: 0
+  BulletPoolAmount: 30
   pooledObjects: []
+  Crosshair: {fileID: 0}
+  BulletDirectionNormalized: {x: 0, y: 0, z: 0}
 --- !u!1 &4471684421423197586
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,6 +9,17 @@ public abstract class GunBase : MonoBehaviour
         Single,
         Burst
     }
+    public Transform BulletInitialPoint;
+    public GameObject BulletPrefab;
+    public Transform PoolTransform;
+    public Vector3 BulletDirectionNormalized;
+    public Camera Cam;
+
     public abstract void Fire();
+
+    public virtual void SwitchFireType()
+    {
+
+    }
 
 }

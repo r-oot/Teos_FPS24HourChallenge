@@ -33,14 +33,10 @@ public class Bullet : MonoBehaviour
 
     private void CheckBulletCollisionWRay()
     {
-        RaycastHit[] hits = Physics.RaycastAll(new Ray(bulletPrevPos, (transform.position - bulletPrevPos).normalized), (transform.position - bulletPrevPos).magnitude);
-        if (hits.Length != 0)
+        RaycastHit hit;
+        if (Physics.Raycast(bulletPrevPos,(transform.position - bulletPrevPos).normalized,out hit,(transform.position - bulletPrevPos).magnitude))
         {
-            foreach(RaycastHit hit in hits)
-            {
-                Debug.Log(hit.collider.gameObject.name);
-            }
-            Instantiate(Crater, hits[0].point, Quaternion.identity);
+            Instantiate(Crater, hit.point, Quaternion.identity);
             DeactivateBullet();
         }
     }
