@@ -458,7 +458,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 102227764}
-  - component: {fileID: 102227765}
   m_Layer: 0
   m_Name: ShootSign
   m_TagString: Untagged
@@ -482,19 +481,6 @@ Transform:
   m_Father: {fileID: 2061098868}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &102227765
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 102227763}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82c75838d52dfaf478b951a51432c292, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  signText: ' Fired Bullet Count'
 --- !u!1 &130599170
 GameObject:
   m_ObjectHideFlags: 0
@@ -2545,6 +2531,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc698a7f6b792ff45bb5920f312a24b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isExplosiveActive: 0
+  isBigToggleActive: 0
+  isRedActive: 0
 --- !u!1 &1240853190
 GameObject:
   m_ObjectHideFlags: 0

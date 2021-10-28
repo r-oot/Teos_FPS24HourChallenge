@@ -20,7 +20,7 @@ public class ShootSign : MonoBehaviour
         get => shootedBullet;
         set
         {
-            shootedBullet += value;
+            shootedBullet = value;
             signTMP.text = signText + shootedBullet.ToString();
         }
     }

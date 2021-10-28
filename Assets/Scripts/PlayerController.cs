@@ -6,7 +6,6 @@ public class PlayerController : MonoBehaviour
 {
     private PlayerMovement playerMovement;
     private Gun gun;
-    private ShootSign shootSign;
 
     [Header("Movements")]
     [SerializeField, Range(50, 100)]
@@ -16,7 +15,6 @@ public class PlayerController : MonoBehaviour
     {
         playerMovement = GetComponent<PlayerMovement>();
         gun = GetComponentInChildren<Gun>();
-        shootSign = FindObjectOfType<ShootSign>();    
     }
 
     private void Update()
@@ -30,7 +28,6 @@ public class PlayerController : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 gun.Fire();
-                shootSign.ShootedBullet = 1;
             }
             MoveKeyControls();
         }

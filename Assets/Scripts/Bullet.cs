@@ -42,6 +42,7 @@ public class Bullet : MonoBehaviour
             return;
         Fired = false;
         Gun.AddBulletToPool(this.gameObject);
+        //ToDo: bulletýn özelliklerini normale çevir.
     }
     private void OnTriggerEnter(Collider other)
     {
