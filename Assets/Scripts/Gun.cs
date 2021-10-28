@@ -23,7 +23,6 @@ public class Gun : GunBase
 
     private void Update()
     {
-        SetAimToCrosshair();
         if (Input.GetKeyDown(KeyCode.V))
         {
             SwitchFireType();        
@@ -46,18 +45,25 @@ public class Gun : GunBase
     }
 
     RaycastHit hit;
+    Collider col;
     private void SetAimToCrosshair()
     {
         Ray RayOrigin = Cam.ScreenPointToRay(Crosshair.position);
-        if (Physics.Raycast(RayOrigin, out hit))
+        col = null;
+        if (Physics.Raycast(RayOrigin, out hit,50f))
         {
             Vector3 direction;
             if (hit.collider != null)
             {
+                col = hit.collider;
                 direction = hit.point - base.BulletInitialPoint.transform.position;
                 base.BulletDirectionNormalized = direction.normalized;
                 Debug.DrawRay(base.BulletInitialPoint.transform.position, direction, Color.red, Time.deltaTime);
             }
+        }
+        if(col == null) // havaya ateþ edildiyse
+        {
+            base.BulletDirectionNormalized = base.BulletInitialPoint.transform.forward;
         }
     }
 
@@ -74,6 +80,7 @@ public class Gun : GunBase
     public override void Fire()
     {
         Debug.Log("Fire");
+        SetAimToCrosshair();
         switch (gunType)
         {
             case GunType.Single:
@@ -116,6 +123,7 @@ public class Gun : GunBase
             bullet.Gun = this;
             shootSign.ShootedBullet++;
             bullet.gameObject.SetActive(true);
+            col = null;
         }
     }
 
@@ -130,13 +138,17 @@ public class Gun : GunBase
                 SetBulletFeatures();
                 bullet.SetPositionAndRotation(base.BulletInitialPoint.transform.position, base.BulletInitialPoint.transform.localRotation);
                 Vector3 deflectionRate = Random.insideUnitSphere;
-                bullet.BulletDirection = ((hit.point + ((i == 0) ? Vector3.zero : new Vector3(deflectionRate.x, deflectionRate.y, 0))) - base.BulletInitialPoint.transform.position);
+                if (col != null)
+                    bullet.BulletDirection = ((hit.point + ((i == 0) ? Vector3.zero : new Vector3(deflectionRate.x, deflectionRate.y, 0))) - base.BulletInitialPoint.transform.position);
+                else
+                    bullet.BulletDirection = BulletDirectionNormalized;
                 bullet.Gun = this;
                 shootSign.ShootedBullet++;
                 bullet.gameObject.SetActive(true);
 
                 yield return new WaitForSeconds(0.1f);
             }
+            col = null;
         }
     }
 
