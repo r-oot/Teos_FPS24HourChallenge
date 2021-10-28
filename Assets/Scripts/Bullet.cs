@@ -8,6 +8,7 @@ public class Bullet : MonoBehaviour
     [SerializeField] private float BulletFlyTime;
     [SerializeField] private float BulletSpeed;
     private float timer;
+    private Vector3 bulletPrevPos;
     public Vector3 BulletDirection;
     public Gun Gun;
     public GameObject Crater;
@@ -23,8 +24,24 @@ public class Bullet : MonoBehaviour
     {
         if (Fired)
         {
+            bulletPrevPos = transform.position;
             transform.Translate(Vector3.forward * Time.deltaTime * BulletSpeed);
+            CheckBulletCollisionWRay();
             CheckFlyTime();
+        }
+    }
+
+    private void CheckBulletCollisionWRay()
+    {
+        RaycastHit[] hits = Physics.RaycastAll(new Ray(bulletPrevPos, (transform.position - bulletPrevPos).normalized), (transform.position - bulletPrevPos).magnitude);
+        if (hits.Length != 0)
+        {
+            foreach(RaycastHit hit in hits)
+            {
+                Debug.Log(hit.collider.gameObject.name);
+            }
+            Instantiate(Crater, hits[0].point, Quaternion.identity);
+            DeactivateBullet();
         }
     }
 
@@ -43,13 +60,6 @@ public class Bullet : MonoBehaviour
         Fired = false;
         Gun.AddBulletToPool(this.gameObject);
         //ToDo: bulletýn özelliklerini normale çevir.
-    }
-    private void OnTriggerEnter(Collider other)
-    {
-        DeactivateBullet();
-        Vector3 contactPoint = other.ClosestPoint(transform.position);
-        Instantiate(Crater, contactPoint, Quaternion.identity);
-        Debug.Log("Collided");
     }
     public void SetPositionAndRotation(Vector3 newPos, Quaternion newRot)
     {

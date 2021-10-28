@@ -10,15 +10,15 @@ public class Gun : GunBase
 
     public GameObject BulletPrefab;
     public Transform PoolTransform;
-    public int PoolAmount = 20;
+    public int BulletPoolAmount = 30;
     public List<GameObject> pooledObjects;
 
     public Transform Crosshair;
     public Vector3 BulletDirectionNormalized;
-    public Camera Cam;
+    private Camera cam;
     private void Awake()
     {
-        Cam = Camera.main;
+        cam = Camera.main;
         shootSign = FindObjectOfType<ShootSign>();
     }
     private void Start()
@@ -53,7 +53,7 @@ public class Gun : GunBase
     RaycastHit hit;
     private void SetAimToCrosshair()
     {
-        Ray RayOrigin = Cam.ScreenPointToRay(Crosshair.position);
+        Ray RayOrigin = cam.ScreenPointToRay(Crosshair.position);
         if (Physics.Raycast(RayOrigin, out hit))
         {
             if (hit.collider != null)
@@ -65,11 +65,11 @@ public class Gun : GunBase
         }
     }
 
-    public void InstantiatePoolObjects()
+    private void InstantiatePoolObjects()
     {
         pooledObjects = new List<GameObject>();
         GameObject temp;
-        for (int i = 0; i < PoolAmount; i++)
+        for (int i = 0; i < BulletPoolAmount; i++)
         {
             temp = Instantiate(BulletPrefab);
             AddBulletToPool(temp);
@@ -107,7 +107,7 @@ public class Gun : GunBase
         }
     }
 
-    public void FireSingleBullet()
+    private void FireSingleBullet()
     {
         
         if (pooledObjects.Count != 0)

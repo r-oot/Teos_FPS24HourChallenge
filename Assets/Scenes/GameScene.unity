@@ -3705,7 +3705,7 @@ GameObject:
   - component: {fileID: 2141806672}
   - component: {fileID: 2141806677}
   - component: {fileID: 2141806676}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -3802,7 +3802,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7a4804158b03de41895775025228a0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Cam: {fileID: 0}
 --- !u!114 &2141806677
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3884,6 +3883,10 @@ PrefabInstance:
       propertyPath: crossHair
       value: 
       objectReference: {fileID: 398622192}
+    - target: {fileID: 4471341216958518813, guid: 408616530bc95a2488ed46b1551504ec, type: 3}
+      propertyPath: PoolAmount
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 4471341216958518813, guid: 408616530bc95a2488ed46b1551504ec, type: 3}
       propertyPath: BulletPrefab
       value: 
